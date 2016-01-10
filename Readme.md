@@ -5,18 +5,20 @@
 ### Download and install Xcode AND Xcode command line tool from https://developer.apple.com/downloads/ (needs a free developper connection account from apple)
 
 ## in a terminal try 
+
  which make
 # it shall output this :
  /usr/bin/make
 
-
 ## configure perl update system to use CPAN
+
 sudo perl -MCPAN -e shell
  perl> o conf init
  perl> exit
 sudo perl -MCPAN -e 'install Bundle::CPAN'
 
 ## install main perl xmltv dependencies :
+
  sudo perl -MCPAN -e shell
   perl> install Tk Tk::TableMatrix XML::Parser XML::Twig XML::Writer Date::Manip LWP Memoize Storable HTML::Parser HTML::TreeBuilder SOAP::Lite CGI Term::ProgressBar PerlIO::gzip Compress::Zlib Lingua::Preferred Unicode::String Lingua::EN::Numbers::Ordinate Log::TraceMessages 
   perl> exit
