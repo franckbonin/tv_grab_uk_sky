@@ -4,45 +4,44 @@
 ### Download and install macport from https://www.macports.org
 ### Download and install Xcode AND Xcode command line tool from https://developer.apple.com/downloads/ (needs a free developper connection account from apple)
 
-## in a terminal try 
+### in a terminal try 
  which make  
-## it shall output this :  
+### it shall output this :  
  /usr/bin/make  
-## configure perl update system to use CPAN
+### configure perl update system to use CPAN
 sudo perl -MCPAN -e shell  
  perl> o conf init  
  perl> exit  
 sudo perl -MCPAN -e 'install Bundle::CPAN'  
 
-## install main perl xmltv dependencies :
-
+### install main perl xmltv dependencies :
  sudo perl -MCPAN -e shell  
   perl> install Tk Tk::TableMatrix XML::Parser XML::Twig XML::Writer Date::Manip LWP Memoize Storable HTML::Parser HTML::TreeBuilder SOAP::Lite CGI Term::ProgressBar PerlIO::gzip Compress::Zlib Lingua::Preferred Unicode::String Lingua::EN::Numbers::Ordinate Log::TraceMessages   
   perl> exit  
 
 ## tricky part : WWW::Mechanize workarround
-## perl bundle "WWW::Mechanize" have a bug with Mac os X ipv6 alias.
-## in file /etc/hosts, comment IPV6 alias :
+### perl bundle "WWW::Mechanize" have a bug with Mac os X ipv6 alias.
+### in file /etc/hosts, comment IPV6 alias :
  sudo vi /etc/hosts  
-### type ‘i’ to enter insert and
-### comment ipv6 localhost alias
-### type Escape and ":wq" to save tour change
+#### type ‘i’ to enter insert and
+#### comment ipv6 localhost alias
+#### type Escape and ":wq" to save tour change
 
-## then install WWW::Mechanize perl bundle :
+### then install WWW::Mechanize perl bundle :
  sudo perl -MCPAN -e shell  
   perl> install WWW::Mechanize   
   perl> exit  
 
-## then revert /etc/hosts to its original content
+### then revert /etc/hosts to its original content
  sudo vi /etc/hosts   
-## uncomment ipv6 localhost alias
+### uncomment ipv6 localhost alias
 
-## And continue installing main perl xmltv dependencies :
+### And continue installing main perl xmltv dependencies :
  sudo perl -MCPAN -e shell  
   perl> install HTML::TableExtract Archive::Zip IO::Scalar   
   perl> exit  
 
-## Now install xmltv grabber specific dependencies
+### Now install xmltv grabber specific dependencies
  sudo perl -MCPAN -e shell  
 \# These dependencies are required for tv_grab_uk_rt:  
   perl> install DateTime DateTime::Duration DateTime::TimeZone HTTP::Cache::Transparent  
@@ -61,10 +60,10 @@ sudo perl -MCPAN -e 'install Bundle::CPAN'
   perl> exit  
 
 ## The custom part, download and build xmltv :  
-## install wget tool :  
+### install wget tool :  
  sudo port install wget  
 
-## get xmltv using wget, (go to a location where you can compile things) :  
+### get xmltv using wget, (go to a location where you can compile things) :  
  cd /path/to/where/you/want  
  wget http://downloads.sourceforge.net/project/xmltv/xmltv/0.5.66/xmltv-0.5.66.tar.bz2  
  tar xvjf xmltv-0.5.66.tar.bz2  
@@ -73,11 +72,11 @@ sudo perl -MCPAN -e 'install Bundle::CPAN'
  make  
  make test  
 
-## make test could fail due to deprecated api usage or stderr unexpected output result from some unit test predicate (this is due to poor designed unit tests, IGNORE IT!)
-## install perl xmltv  
+### make test could fail due to deprecated api usage or stderr unexpected output result from some unit test predicate (this is due to poor designed unit tests, IGNORE IT!)
+### install perl xmltv  
  sudo make install  
 
-## shall output things like that :
+### shall output things like that :
 
 Installing /opt/local/lib/perl5/site_perl/XMLTV.pm  
 Installing /opt/local/lib/perl5/site_perl/XMLTV/Ask.pm  
@@ -278,36 +277,36 @@ Installing /opt/local/share/xmltv/tv_grab_uk_rt/lineups/virginhd.xml
 Installing /opt/local/share/xmltv/tv_grab_uk_rt/lineups/xmltv-lineups.xsl  
 Installing /opt/local/share/xmltv/tv_grab_uk_tvguide/tv_grab_uk_tvguide.map.conf  
 
-## for french TV
-## use tv_grab_fr_kazer script provided by xmltv 
-## tv_grab_fr_kazer is located at /opt/local/bin/tv_grab_fr_kazer (see logs before)
-## tv_grab_fr_kazer need a free account (and it hash access key) from http://www.kazer.org 
-## create an account at http://www.kazer.org and select your channels at http://www.kazer.org/my-channels.html
+## French TV case
+### use tv_grab_fr_kazer script provided by xmltv 
+### tv_grab_fr_kazer is located at /opt/local/bin/tv_grab_fr_kazer (see logs before)
+### tv_grab_fr_kazer need a free account (and it hash access key) from http://www.kazer.org 
+### create an account at http://www.kazer.org and select your channels at http://www.kazer.org/my-channels.html
 
-## for Uk TV
-## download xmltv sky network EPG grabber
+## Uk TV case
+### download xmltv sky network EPG grabber
  wget https://raw.githubusercontent.com/franckbonin/tv_grab_uk_sky/master/tv_grab_uk_sky  
-## you may change the first line of this script to use the right perl interpretor
-
-## install xmltv sky network EPG grabber where all other grabber where installed with XMLTV, see logs before : (/opt/local/bin/)
+### you may change the first line of this script to use the right perl interpretor
+### install xmltv sky network EPG grabber where all other grabber where installed with XMLTV, see logs before : (/opt/local/bin/)
  sudo mv tv_grab_uk_sky /opt/local/bin/  
  sudo chmod 755 /opt/local/bin/tv_grab_uk_sky  
-## JSON::XS dependency is required for tv_grab_uk_sky :
+### JSON::XS dependency is required for tv_grab_uk_sky :
  sudo perl -MCPAN -e shell  
   perl> install JSON::XS  
   perl> exit  
 
-## following instructions are for both tv_grab_uk_sky or tv_grab_fr_kazer, (just replace tv_grab_uk_sky by tv_grab_fr_kazer)
-## configure xmltv sky network EPG grabber :
-## you may require to define PERL5LIB env var if perl script fail to found its dependencies. It shall be setted to /opt/local/lib/perl5/site_perl/ or something like that
+## Configure, test and automate it all !
+### following instructions are for both tv_grab_uk_sky or tv_grab_fr_kazer, (just replace tv_grab_uk_sky by tv_grab_fr_kazer)
+### configure xmltv sky network EPG grabber :
+### you may require to define PERL5LIB env var if perl script fail to found its dependencies. It shall be setted to /opt/local/lib/perl5/site_perl/ or something like that
  PERL5LIB=/opt/local/lib/perl5/site_perl/ /opt/local/bin/tv_grab_uk_sky --configure  
-## test it (it could be long, be patient):
+### test it (it could be long, be patient):
  PERL5LIB=/opt/local/lib/perl5/site_perl/ /opt/local/bin/tv_grab_uk_sky > xmltv.xml  
 
-## automate and integrate it with EyeTv  
+### automate and integrate it with EyeTv  
  mkdir -p /Library/WebServer/Documents/eyetv  
  sudo vi /Library/WebServer/Documents/eyetv/update.sh  
-## Paste in the following text
+### Paste in the following text
 
 \#!/bin/sh  
 cd /Library/WebServer/Documents/eyetv  
@@ -316,15 +315,19 @@ PERL5LIB=/opt/local/lib/perl5/site_perl/ /opt/local/bin/tv_grab_uk_sky > /Librar
 \# open EyeTV with xmltv file  
 open -a EyeTV /Library/WebServer/Documents/eyetv/xmltv.xml  
 
-## Make your script executable
+### Make your script executable
  sudo chmod 755 /Library/WebServer/Documents/eyetv/update.sh  
-## And make your script automatically called every dat. to do so edit your crontab :
+### And make your script automatically called every day. To do so edit your crontab :
  crontab -e  
-## type ‘i’ to enter insert mode and enter the following:  
+### type ‘i’ to enter insert mode and enter the following:  
  15 07 * * * /Library/WebServer/Documents/eyetv/update.sh  
 
-## This should import your data every morning at 7:15 AM. Test it out:
+### This should import your data every morning at 7:15 AM. Test it out:
  /Library/WebServer/Documents/eyetv/update.sh  
+### Eye tv should be lanched at the and of the process
+### go to channels list and choose xmltv as program provide 
+
+## Enjoy !
 
 
 
