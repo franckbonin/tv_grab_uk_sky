@@ -1,4 +1,4 @@
-# FREE EPG for EyeTv with perl XMLTV : a French TV and free Sat UK TV case
+# FREE EPG for EyeTv with perl XMLTV : French TV and free Sat UK TV sample case
 
 ## XMLTV require perl and some developper tools and skill, lets go !
 ### Download and install macport from https://www.macports.org
