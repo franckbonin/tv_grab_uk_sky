@@ -1,4 +1,4 @@
-# free xmltv for EyeTv : french TV and free Sat UK TV
+# FREE EPG for EyeTv with perl XMLTV : a French TV and free Sat UK TV case
 
 ## XMLTV require perl and some developper tools and skill, lets go !
 ### Download and install macport from https://www.macports.org
@@ -23,9 +23,9 @@ sudo perl -MCPAN -e 'install Bundle::CPAN'
 ### perl bundle "WWW::Mechanize" have a bug with Mac os X ipv6 alias.
 ### in file /etc/hosts, comment IPV6 alias :
  sudo vi /etc/hosts  
-#### type ‘i’ to enter insert and
+#### type ‘i’ to enter vi insert mode and
 #### comment ipv6 localhost alias
-#### type Escape and ":wq" to save your change
+#### type Escape and ":wq" command to save your change
 
 ### Then install WWW::Mechanize perl bundle :
  sudo perl -MCPAN -e shell  
