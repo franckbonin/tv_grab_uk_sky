@@ -1,4 +1,9 @@
 #!/usr/bin/perl -w
+#!/usr/bin/perl -w
+# or
+#!/opt/local/bin/perl5.16 -w
+# or
+#!/opt/local/bin/perl5.XX -w
 
 =pod
 
@@ -74,6 +79,7 @@ use JSON;
 use HTML::Entities;
 use DateTime;
 use Encode;
+use feature "switch";
 
 my( $opt, $conf ) = ParseOptions( { 
   grabber_name => "tv_grab_uk_sky",
@@ -172,6 +178,37 @@ foreach my $ch (values(%channels))
 		my $prog_desc = $prog->{shortDesc};
 		encode_entities($prog_desc);
 		$data .= "    <desc lang='en'>$prog_desc</desc>\n";
+		
+		my $prog_genre = $prog->{genre};
+		my $prog_category = "Undefined";
+# from http://epgservices.sky.com/tvlistings-proxy/TVListingsProxy/init.json :
+# "genre":[s
+# {"genreid":"0","name":"Undefined"},
+# {"genreid":"1","name":"Specialist"},
+# {"genreid":"2","name":"Children"},
+# {"genreid":"3","name":"Entertainment"},
+# {"genreid":"4","name":"Music & Radio"},
+# {"genreid":"5","name":"News & Documentaries"},
+# {"genreid":"6","name":"Movies"},
+# {"genreid":"7","name":"Sports"}],
+        if( length( $prog_genre // '' ) ) 
+        {
+            given ($prog_genre)
+            {
+                when ("1") { $prog_category = "Specialist"; }
+                when ("2") { $prog_category = "Children"; }
+                when ("3") { $prog_category = "Entertainment" }
+                when ("4") { $prog_category = "Music & Radio"; }
+                when ("5") { $prog_category = "News & Documentaries" }
+                when ("6") { $prog_category = "Movies"; }
+                when ("7") { $prog_category = "Sports"; }
+                default    { $prog_category = "Undefined"; }
+            }
+        }
+
+        encode_entities($prog_category);
+		$data .= "    <category lang='en'>$prog_category</category>\n";
+		
 		$data .= "  </programme>\n";
 	}
 }
