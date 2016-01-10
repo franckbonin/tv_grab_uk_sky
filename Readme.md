@@ -325,7 +325,8 @@ open -a EyeTV /Library/WebServer/Documents/eyetv/xmltv.xml
 ### This should import your data every morning at 7:15 AM. Test it out:
  /Library/WebServer/Documents/eyetv/update.sh  
 ### Eye tv should be lanched at the and of the process
-### go to channels list and choose xmltv as program provide 
+### go to channels list and choose xmltv as program provider for every channel.
+### it should find programs within xml epg provided or ask you for corresponding channel names 
 
 ## Enjoy !
 
