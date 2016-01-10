@@ -1,10 +1,10 @@
 # free xmltv for EyeTv : french TV and free Sat UK TV
 
-## XMLT require perl an developper tool, lets go
+## XMLTV require perl and some developper tools and skill, lets go !
 ### Download and install macport from https://www.macports.org
 ### Download and install Xcode AND Xcode command line tool from https://developer.apple.com/downloads/ (needs a free developper connection account from apple)
 
-### in a terminal try 
+### In a terminal try :
  which make  
 ### it shall output this :  
  /usr/bin/make  
@@ -14,34 +14,34 @@ sudo perl -MCPAN -e shell
  perl> exit  
 sudo perl -MCPAN -e 'install Bundle::CPAN'  
 
-### install main perl xmltv dependencies :
+### Install main perl xmltv dependencies :
  sudo perl -MCPAN -e shell  
   perl> install Tk Tk::TableMatrix XML::Parser XML::Twig XML::Writer Date::Manip LWP Memoize Storable HTML::Parser HTML::TreeBuilder SOAP::Lite CGI Term::ProgressBar PerlIO::gzip Compress::Zlib Lingua::Preferred Unicode::String Lingua::EN::Numbers::Ordinate Log::TraceMessages   
   perl> exit  
 
-## tricky part : WWW::Mechanize workarround
+## Tricky part : the WWW::Mechanize workarround
 ### perl bundle "WWW::Mechanize" have a bug with Mac os X ipv6 alias.
 ### in file /etc/hosts, comment IPV6 alias :
  sudo vi /etc/hosts  
 #### type ‘i’ to enter insert and
 #### comment ipv6 localhost alias
-#### type Escape and ":wq" to save tour change
+#### type Escape and ":wq" to save your change
 
-### then install WWW::Mechanize perl bundle :
+### Then install WWW::Mechanize perl bundle :
  sudo perl -MCPAN -e shell  
   perl> install WWW::Mechanize   
   perl> exit  
 
-### then revert /etc/hosts to its original content
+### Finaly revert /etc/hosts to its original content
  sudo vi /etc/hosts   
 ### uncomment ipv6 localhost alias
 
-### And continue installing main perl xmltv dependencies :
+### Now continue installing main perl xmltv dependencies :
  sudo perl -MCPAN -e shell  
   perl> install HTML::TableExtract Archive::Zip IO::Scalar   
   perl> exit  
 
-### Now install xmltv grabber specific dependencies
+### Now install xmltv grabber specifics dependencies
  sudo perl -MCPAN -e shell  
 \# These dependencies are required for tv_grab_uk_rt:  
   perl> install DateTime DateTime::Duration DateTime::TimeZone HTTP::Cache::Transparent  
@@ -59,7 +59,7 @@ sudo perl -MCPAN -e 'install Bundle::CPAN'
   perl> install XML::LibXML File::Slurp  
   perl> exit  
 
-## The custom part, download and build xmltv :  
+## The developper part, download and build xmltv :  
 ### install wget tool :  
  sudo port install wget  
 
@@ -303,7 +303,7 @@ Installing /opt/local/share/xmltv/tv_grab_uk_tvguide/tv_grab_uk_tvguide.map.conf
 ### test it (it could be long, be patient):
  PERL5LIB=/opt/local/lib/perl5/site_perl/ /opt/local/bin/tv_grab_uk_sky > xmltv.xml  
 
-### automate and integrate it with EyeTv  
+### Automate and integrate it with EyeTv  
  mkdir -p /Library/WebServer/Documents/eyetv  
  sudo vi /Library/WebServer/Documents/eyetv/update.sh  
 ### Paste in the following text
