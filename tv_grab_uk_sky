@@ -81,7 +81,7 @@ my( $opt, $conf ) = ParseOptions( {
   stage_sub => \&config_stage,
   listchannels_sub => \&list_channels,
   version => '$Id: tv_grab_uk_sky.in,v 1.1 2009/06/21 Exp $',
-  description => "",
+  description => "United Kingdom/Republic of Ireland (Sky EPG)",
 } );
 
 # How many days are we going to grab data for?
